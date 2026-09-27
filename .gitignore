@@ -1,15 +1,17 @@
-# Rust
-/target/
+# Rust — pattern is UNANCHORED on purpose. The crate lives in server/, so the build
+# directory is server/target/. A leading slash would anchor it to the repo root and miss it.
+target/
 **/*.rs.bk
 
-# Node
+# Node — unanchored for the same reason.
 node_modules/
-/client/dist/
-/client/.vite/
+dist/
+.vite/
 *.tsbuildinfo
 
 # Notes data — NEVER COMMIT. Contains real private notes.
-/data/
+# Unanchored so it matches regardless of which directory the server runs from.
+data/
 *.sqlite
 *.sqlite-wal
 *.sqlite-shm
@@ -22,7 +24,9 @@ node_modules/
 
 # Exported backups (may contain private notes)
 *.zip
-!docs/*.zip
+
+# Local git worktrees (task delegation)
+docs/specs-worktree/
 
 # OS / editor
 .DS_Store
