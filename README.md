@@ -1,16 +1,13 @@
-# Notally Web
+# Inkwell
 
-A self-hosted, server-hosted notes app — a web recreation of the
-[Notally](https://github.com/OmGodse/Notally) Android app, with portable zip storage.
-
-Rich text notes and checklists, labels, colours, pinning, archive/trash, image attachments,
-search, and one-click backup you can zip up and carry.
+A self-hosted notes app for the web. Rich text notes and checklists, labels, colours,
+pinning, archive and trash, image attachments, search, and a backup you can zip up and carry.
 
 ## Why it exists
 
-Self-host your own notes. No account, no telemetry, no third-party service. Your data is a
-SQLite file plus a `media/` folder — readable, inspectable, and yours. Import a backup
-exported from the Android app and it all comes across.
+Host your own notes. No account, no telemetry, no third-party service. Your data is a SQLite
+file plus a `media/` folder — readable, inspectable, and yours. Import a backup exported from
+the [Notally](https://github.com/OmGodse/Notally) Android app and everything comes across.
 
 ## Stack
 
@@ -26,12 +23,10 @@ comfortable on a small VPS or a home box.
 
 ## Status
 
-In development. See [`docs/plan.md`](docs/plan.md) for the full plan and
+**In development.** Not yet usable — see [`docs/plan.md`](docs/plan.md) for the plan and
 [`docs/TASKS.md`](docs/TASKS.md) for the task breakdown.
 
-## Building
-
-Not yet wired up. Planned layout:
+Planned layout:
 
 ```
 server/   Rust crate (axum API + static file serving)
@@ -44,7 +39,7 @@ data/     runtime state — SQLite database and media. Gitignored.
 Export produces a single zip:
 
 ```
-notally-20260927-143012.zip
+inkwell-20260927-143012.zip
 ├── manifest.json     version, timestamp, note count
 ├── notes.json        all notes, labels, settings
 └── media/
@@ -52,19 +47,30 @@ notally-20260927-143012.zip
     └── audios/
 ```
 
-Import auto-detects three formats: the JSON above, an Android app backup
-(`.zip` containing a SQLite file plus `Images/` and `Audios/`), and the legacy Android XML
-dump. Notes from the phone app import without conversion.
+Import auto-detects three formats: the JSON above, an Android Notally backup (`.zip`
+containing a SQLite file plus `Images/` and `Audios/`), and the legacy Notally XML dump. Notes
+from the phone app import without conversion.
 
-## Security notes
+## Security
 
 - Single user with a password (Argon2id)
 - Session cookie is `HttpOnly` + `SameSite=Strict`
-- Serve behind TLS in production; the app refuses to issue session cookies over plain
-  HTTP unless explicitly allowed for local development
+- Serve behind TLS in production
 - `.env` holds the session secret and is gitignored
 
-## Licence
+## Credits and licence
 
-Not yet decided. The original Notally app is by
-[Om Godse](https://github.com/OmGodse/Notally) — see that project for its licence.
+Inkwell is an **independent reimplementation** of the features of
+[Notally](https://github.com/OmGodse/Notally) by Om Godse, written from scratch in a different
+language and architecture. The Notally data model, export formats, and colour palette are
+reproduced so that backups are interchangeable between the two apps.
+
+No source code was copied from Notally. Notally is licensed GPL-3.0; because no Notally code
+is included here, this project is licensed independently under the MIT licence below.
+
+If any substantive Notally code is incorporated in future, this project's licence must be
+reconsidered.
+
+MIT — see [`LICENSE`](LICENSE).
+
+The original Notally app is © Om Godse and contributors, and is available under GPL-3.0.

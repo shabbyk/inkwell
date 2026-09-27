@@ -1,4 +1,4 @@
-# Notally Web — Server-Hosted Notes App
+# Inkwell — Server-Hosted Notes App
 
 Recreate the Notally Android notes app as a self-hosted web application with portable,
 zip-carried storage.
@@ -20,7 +20,7 @@ zip-carried storage.
 | Import formats | All three (new JSON, Android `.zip`, legacy XML) | So existing phone notes carry over |
 | Search | FTS5, with LIKE fallback | Replaces the original's LIKE + post-filter hack |
 | Reminders | **Deferred — data only** | Column and enum preserved; no UI, nothing fires |
-| Repository | **Separate new repo** (`~/Dev/notally-web`), not the Android fork | See section 10 |
+| Repository | **Separate new repo** (`~/Dev/inkwell`), not the Android fork | See section 10 |
 
 ### Why Rust
 
@@ -144,11 +144,11 @@ sharing across an HTTP boundary is copy-paste, not reuse.
 
 ## 3. Architecture
 
-Rooted at `~/Dev/notally-web` — a **standalone repository**, sibling to the Android fork
+Rooted at `~/Dev/inkwell` — a **standalone repository**, sibling to the Android fork
 (see section 10 for why).
 
 ```
-notally-web/
+inkwell/
 ├── server/                 Rust crate
 │   ├── src/
 │   │   ├── main.rs         binary entry, static file serving
@@ -345,7 +345,7 @@ The Android fork stays a clean mirror and is never modified by this work.
 ### Setup
 
 ```bash
-mkdir -p ~/Dev/notally-web && cd ~/Dev/notally-web && git init
+mkdir -p ~/Dev/inkwell && cd ~/Dev/inkwell && git init
 mkdir -p docs && cp ~/.opencode/plan/notally-web.md docs/plan.md
 git switch -c feat/initial-scaffold
 ```
